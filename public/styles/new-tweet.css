@@ -52,7 +52,10 @@ button {
   padding-bottom: 3px;
 }
 
-
+/* Red counter style if negative number */
+.counterErr {
+  color: #ff0000;
+}
 
 
 
