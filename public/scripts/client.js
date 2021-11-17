@@ -23,7 +23,7 @@ $(document).ready(function() {
     const avatar = data.user.avatars;
     const userId = data.user.handle;
     const text = data.content.text;
-    const date = data.created_at;
+    const date = timeago.format(data.created_at);
 
 
     let $tweet = `
