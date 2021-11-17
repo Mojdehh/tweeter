@@ -1,0 +1,51 @@
+
+/* Tweets Container */
+
+article {
+  width: 100%;
+  height: 200px;
+  border: 3px solid;
+  background-image: url("../images/brick-wall.png");
+}
+
+/* Hover state of Tweets Container */
+article:hover {
+  box-shadow: 7px 7px rgb(172, 167, 204);
+}
+
+.tweet-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Username and ID style */
+article header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 1em 0 1em;
+}
+
+.user-id {
+  color: rgb(155, 148, 148);
+}
+
+/* Tweet text */
+p {
+  padding: 0 1em 0.5em 1em;
+}
+
+/* Tweet date and icons */
+article footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 3px solid;
+  padding: 0.5em 1.2em 0 1.2em;
+  font-size: 20px;
+}
+
+/* Hover state of icons */
+.fas:hover {
+  color: orange;
+}
