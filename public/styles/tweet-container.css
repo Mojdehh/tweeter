@@ -6,6 +6,8 @@ article {
   height: 200px;
   border: 3px solid;
   background-image: url("../images/brick-wall.png");
+  margin-bottom: 40px; /* Add gap between tweet containers */
+  padding: 10px; /* Add left and right space */
 }
 
 /* Hover state of Tweets Container */
@@ -15,9 +17,6 @@ article:hover {
 
 .tweet-container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 /* Username and ID style */
