@@ -58,6 +58,12 @@ button {
   color: #ff0000;
 }
 
-
-
+/* Error message display style */
+#error {
+  color: #ff0000;
+  border: #ff0000 solid 3px;
+  text-align: center;
+  padding: 0.5em;
+  margin: 1em 25em 1em 25em;
+}
 

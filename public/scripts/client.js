@@ -6,6 +6,7 @@
 
 $(document).ready(function() {
 
+  // Function to prevent unsafe tweets(XSS)
   const escape = function (str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
@@ -48,7 +49,10 @@ $(document).ready(function() {
     return $tweet;
 
   };
-   
+  
+
+  //Error handling with jQuery 
+  const $errMsg = 
 
 
 // Handle new tweet form submit
