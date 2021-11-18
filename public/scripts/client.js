@@ -51,7 +51,7 @@ $(document).ready(function() {
 $("#tweetform").submit(function(event) {
   event.preventDefault();        //prevent submit event of its default behavior
   const $tweetText = $(event.target).serialize();
-  console.log('tweettest: ', $tweetText);
+  // console.log('tweettest: ', $tweetText);
   $.post('/tweets', $tweetText)   //send form data to server
     .then(() => {
     $('#tweet-text').val('');     //to put the curser back to begining
@@ -61,6 +61,16 @@ $("#tweetform").submit(function(event) {
   })
 
 });
+
+
+//Fetch tweets with AJAX
+// get request to /tweets and receive array of JSON tweets
+const loadTweets = () => {
+  $.ajax('/tweets', {method: 'GET'})
+  .then(renderTweets);
+};
+
+loadTweets();
 
 
 
