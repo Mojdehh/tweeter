@@ -6,6 +6,8 @@
 
 $(document).ready(function() {
 
+  $('#error').hide();
+
   // Function to prevent unsafe tweets(XSS)
   const escape = function (str) {
     let div = document.createElement("div");
@@ -52,22 +54,26 @@ $(document).ready(function() {
   
 
   //Error handling with jQuery 
-  const $errMsg = 
+  const errorMessage = function(message) {
+    $('#error').prepend(message).slideDown("slow");
+  };
 
 
 // Handle new tweet form submit
 $("#tweetform").submit(function(event) {
   event.preventDefault();        //prevent submit event of its default behavior
 
-  const $tweetText = $(event.target).serialize();
-  // console.log('tweettest: ', $tweetText);
-  const tweetCount = $tweetText.length - 5;
+  $('#error').empty();
+  $('#error').hide();
   
-  
-  if (tweetCount == 0) {
-    return alert('Text is missing!')
-  } else if (tweetCount > 140) {
-    return alert('Please respect our limit of 140 characters!')
+  const $tweetText = $(this).serialize();
+  const tweet = $('#tweet-text').val();
+  const tweetCount = tweet.length;
+
+  if (tweetCount === 0 || tweet.indexOf(" ") === tweetCount - 1 || tweet.indexOf(" ") === 0) {    //Check if tweet is empty
+    return errorMessage('<i class="fas fa-exclamation-triangle"></i> Text is missing! <i class="fas fa-exclamation-triangle"></i>')
+  } else if (tweetCount > 140) {    //Check if tweet exceeds 140 characters
+    return errorMessage('<i class="fas fa-exclamation-triangle"></i> Please respect our limit of 140 characters! <i class="fas fa-exclamation-triangle"></i>')
   }
   
   $.post('/tweets', $tweetText)   //send form data to server
@@ -87,6 +93,8 @@ $("#tweetform").submit(function(event) {
 const loadTweets = () => {
   $.ajax('/tweets', {method: 'GET'})
   .then(renderTweets);
+  $('#error').empty();
+  $('#error').hide();
 };
 
 
