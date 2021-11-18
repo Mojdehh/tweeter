@@ -50,8 +50,18 @@ $(document).ready(function() {
 // Handle new tweet form submit
 $("#tweetform").submit(function(event) {
   event.preventDefault();        //prevent submit event of its default behavior
+
   const $tweetText = $(event.target).serialize();
   // console.log('tweettest: ', $tweetText);
+  const tweetCount = $tweetText.length - 5;
+  
+  
+  if (tweetCount == 0) {
+    return alert('Text is missing!')
+  } else if (tweetCount > 140) {
+    return alert('Please respect our limit of 140 characters!')
+  }
+  
   $.post('/tweets', $tweetText)   //send form data to server
     .then(() => {
     $('#tweet-text').val('');     //to put the curser back to begining
