@@ -30,6 +30,10 @@ article header {
   color: rgb(155, 148, 148);
 }
 
+img.avatar {
+  height: 1.5em;
+}
+
 /* Tweet text */
 p {
   padding: 0 1em 0.5em 1em;
