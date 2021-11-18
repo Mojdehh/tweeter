@@ -7,12 +7,10 @@
 $(document).ready(function() {
 
   const renderTweets = function(tweets) {
-    
     for (let tweet of tweets) {  // loops through tweets
       const $tweet = createTweetElement(tweet);   // calls createTweetElement for each tweet
-      $('.tweet-container').append($tweet);    // takes return value and appends it to the tweets container
+      $('.tweet-container').prepend($tweet);    // takes return value and appends it to the tweets container
     }
-
   };
 
 
@@ -67,9 +65,10 @@ $("#tweetform").submit(function(event) {
     $('#tweet-text').val('');     //to put the curser back to begining
     $('.counter').text('140');
     $('#tweets-container').empty();
-
+    loadTweets();
   })
-
+  .catch(err => console.log("ERORR: ", err))
+  
 });
 
 
@@ -80,7 +79,7 @@ const loadTweets = () => {
   .then(renderTweets);
 };
 
-loadTweets();
+
 
 
 
