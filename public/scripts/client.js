@@ -4,32 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png"
-      ,
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1581116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-]
-
-
 $(document).ready(function() {
 
   const renderTweets = function(tweets) {
@@ -42,6 +16,7 @@ $(document).ready(function() {
   };
 
 
+  // Create a function to create dynamically html elements
   const createTweetElement = function(tweets) {
     const name = tweets.user.name;
     const avatar = tweets.user.avatars;
@@ -71,12 +46,27 @@ $(document).ready(function() {
   };
    
 
-  renderTweets(data);
-// const $tweet = createTweetElement(tweetData);
 
-// // Test / driver code (temporary)
-// console.log($tweet); // to see what it looks like
-// $('.tweet-container').append($tweet); // to add it to the page so we can make sure it's got all the right elements, classes, etc.
+// Handle new tweet form submit
+$("#tweetform").submit(function(event) {
+  event.preventDefault();        //prevent submit event of its default behavior
+  const $tweetText = $(event.target).serialize();
+  console.log('tweettest: ', $tweetText);
+  $.post('/tweets', $tweetText)   //send form data to server
+    .then(() => {
+    $('#tweet-text').val('');     //to put the curser back to begining
+    $('.counter').text('140');
+    $('#tweets-container').empty();
+
+  })
 
 });
+
+
+
+});
+
+
+
+
 
