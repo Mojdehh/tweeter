@@ -6,6 +6,12 @@
 
 $(document).ready(function() {
 
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
   const renderTweets = function(tweets) {
     for (let tweet of tweets) {  // loops through tweets
       const $tweet = createTweetElement(tweet);   // calls createTweetElement for each tweet
@@ -32,7 +38,7 @@ $(document).ready(function() {
               </div>
                 <span class="user-id">${userId}</span>
             </header>
-            <p><b>${text}</b></p>
+            <p><b>${escape(text)}</b></p>
             <footer>
               <span>${time}</span>
               <span class='icons'><i class="fas fa-flag"></i> <i class="fas fa-retweet"></i> <i class="fas fa-heart"></i></span>
@@ -68,7 +74,7 @@ $("#tweetform").submit(function(event) {
     loadTweets();
   })
   .catch(err => console.log("ERORR: ", err))
-  
+
 });
 
 
