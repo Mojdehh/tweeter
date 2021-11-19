@@ -11,13 +11,15 @@ $(document).ready(function() {
 
 
   // Function to prevent unsafe tweets(XSS)
-  const escape = function (str) {
+  const escape = function(str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   };
 
   const renderTweets = function(tweets) {
+    const container = $('.tweet-container');
+    container.html('');  // clear the container to to rendered twice
     for (let tweet of tweets) {  // loops through tweets
       const $tweet = createTweetElement(tweet);   // calls createTweetElement for each tweet
       $('.tweet-container').prepend($tweet);    // takes return value and appends it to the tweets container
@@ -49,63 +51,66 @@ $(document).ready(function() {
               <span class='icons'><i class="fas fa-flag"></i> <i class="fas fa-retweet"></i> <i class="fas fa-heart"></i></span>
             </footer>
         </article>
-    `
+    `;
+
     return $tweet;
 
   };
   
 
-  //Error handling with jQuery 
+  //Error handling with jQuery
   const errorMessage = function(message) {
     $('#error').prepend(message).slideDown("slow");
   };
 
 
-// Handle new tweet form submit
-$("#tweetform").submit(function(event) {
-  event.preventDefault();        //prevent submit event of its default behavior
+  // Handle new tweet form submit
+  $("#tweetform").submit(function(event) {
+    event.preventDefault();        //prevent submit event of its default behavior
 
-  $('#error').empty();
-  $('#error').hide();
+    $('#error').empty();
+    $('#error').hide();
   
-  const $tweetText = $(this).serialize();
-  const tweet = $('#tweet-text').val();
-  const tweetCount = tweet.length;
+    // const $tweetText = $(this).serialize();
+    const tweet = $('#tweet-text').val();
+    const tweetCount = tweet.length;
 
-  if (tweetCount === 0 || tweet.indexOf(" ") === tweetCount - 1 || tweet.indexOf(" ") === 0) {    //Check if tweet is empty
-    return errorMessage('<i class="fas fa-exclamation-triangle"></i> Text is missing! <i class="fas fa-exclamation-triangle"></i>')
-  } else if (tweetCount > 140) {    //Check if tweet exceeds 140 characters
-    return errorMessage('<i class="fas fa-exclamation-triangle"></i> Please respect our limit of 140 characters! <i class="fas fa-exclamation-triangle"></i>')
-  }
+    if (tweetCount === 0 || tweet.indexOf(" ") === tweetCount - 1 || tweet.indexOf(" ") === 0) {    //Check if tweet is empty
+      return errorMessage('<i class="fas fa-exclamation-triangle"></i>  Text is missing!  <i class="fas fa-exclamation-triangle"></i>');
+    } else if (tweetCount > 140) {    //Check if tweet exceeds 140 characters
+      return errorMessage('<i class="fas fa-exclamation-triangle"></i>  Please respect our limit of 140 characters!  <i class="fas fa-exclamation-triangle"></i>');
+    } else  {
+      $.ajax({
+        method: 'POST',
+        url: '/tweets',
+        data: $("#tweetform").serialize()
+      }).then(loadTweets());
+    }
   
-  $.post('/tweets', $tweetText)   //send form data to server
-    .then(() => {
-    $('#tweet-text').val('');     //to put the curser back to begining
-    $('.counter').text('140');
-    $('#tweets-container').empty();
-    loadTweets();
-  })
-  .catch(err => console.log("ERORR: ", err))
+    // $.post('/tweets', $tweetText)   //send form data to server
+    //   .then(() => {
+    //   $('#tweet-text').val('');     //to put the curser back to begining
+    //   $('.counter').text('140');
+    //   $('#tweets-container').empty();
+    // }).then(loadTweets())
+    //   .catch(err => console.log("ERORR: ", err))
+    
+  });
+
+
+  // Fetch tweets with AJAX
+  // get request to /tweets and receive array of JSON tweets
+  const loadTweets = function() {
+    $.ajax('/tweets', {method: 'GET'})
+      .then(renderTweets);
+    $('#error').empty();
+    $('#error').hide();
+
+  };
+
+  loadTweets();
 
 });
-
-
-  //Fetch tweets with AJAX
-// get request to /tweets and receive array of JSON tweets
-const loadTweets = () => {
-  $.ajax('/tweets', {method: 'GET'})
-  .then(renderTweets);
-  $('#error').empty();
-  $('#error').hide();
-};
-
-
-loadTweets();
-
-
-});
-
-
 
 
 
