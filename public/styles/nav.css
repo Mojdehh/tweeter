@@ -7,7 +7,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 9999;
+  z-index: 1;
   position: fixed; /* Set the navbar to fixed position */
   top: 0; /* Position the navbar at the top of the page */
 }
@@ -15,12 +15,25 @@ nav {
 .logo {
   font-family: 'Bungee', cursive;
   padding-left: 1.5em;
+  font-size: 1.5em;
  }
 
- .nav-content-right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-right: 1.5em;
- }
+.nav-content-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 1.5em;
+}
 
+
+#arrow-icon {
+  color: red;
+  margin: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+  nav {
+    background-color: #f3ab11;
+    background-image: url("../images/brick-wall.png");
+  }
+}

@@ -4,9 +4,23 @@ header.top {
   width: 100%;
   background-color: #f3ab11;
   color: #ffffff;
+  font-family: "Source Sans Pro", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-image: url("../images/brick-wall.png");
 }
+
+
+/* Responsive Design *//*1024px or more */
+@media only screen and (min-width: 1024px) {
+ 
+  header.top {
+    width: 30%; 
+    margin-top: 2em;
+    margin-left: 5em;
+  }
+
+}
+ 

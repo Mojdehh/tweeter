@@ -64,6 +64,18 @@ button {
   border: #ff0000 solid 3px;
   text-align: center;
   padding: 0.5em;
-  margin: 1em 25em 1em 25em;
+  margin: 10px 50px 10px 50px;
 }
 
+/* Responsive Design */ /* max 1023px or less 
+@media only screen and (min-width: 1024px) { 
+
+  label {
+    margin-top: 0em;
+  }
+
+  textarea#tweet-text {
+    margin-top: 0em;
+  }
+
+}

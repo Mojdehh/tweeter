@@ -6,6 +6,7 @@
 
 $(document).ready(function() {
 
+  // Hide errors when page loads
   $('#error').hide();
 
   // Function to prevent unsafe tweets(XSS)
@@ -81,7 +82,7 @@ $("#tweetform").submit(function(event) {
     $('#tweet-text').val('');     //to put the curser back to begining
     $('.counter').text('140');
     $('#tweets-container').empty();
-    loadTweets();
+    // loadTweets();
   })
   .catch(err => console.log("ERORR: ", err))
 
@@ -98,8 +99,7 @@ const loadTweets = () => {
 };
 
 
-
-
+loadTweets();
 
 });
 
