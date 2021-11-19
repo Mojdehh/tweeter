@@ -19,7 +19,7 @@ form {
 label {
   margin-top: 2em;
   margin-bottom: 0.5em;
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 
@@ -53,6 +53,9 @@ button {
   padding-bottom: 3px;
 }
 
+button:hover {
+  background-color: orange;
+}
 /* Red counter style if negative number */
 .counterErr {
   color: #ff0000;
@@ -67,15 +70,3 @@ button {
   margin: 10px 50px 10px 50px;
 }
 
-/* Responsive Design */ /* max 1023px or less 
-@media only screen and (min-width: 1024px) { 
-
-  label {
-    margin-top: 0em;
-  }
-
-  textarea#tweet-text {
-    margin-top: 0em;
-  }
-
-}

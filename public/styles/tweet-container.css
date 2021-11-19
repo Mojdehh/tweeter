@@ -53,22 +53,3 @@ article footer {
   color: orange;
 }
 
-
-/* Responsive Design */ /* max 480px or less 
-@media only screen and (max-width: 480px) {
-
-  article header {
-    font-size: large;
-  }
-  article footer {
-    font-size: small;
-  }
- 
-}
-
-/* Responsive Design */ /* max 1023px or less 
-@media only screen and (max-width: 1023px) { 
-
-
-
-}
