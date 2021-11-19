@@ -71,7 +71,7 @@ $(document).ready(function() {
     $('#error').empty();
     $('#error').hide();
   
-    // const $tweetText = $(this).serialize();
+    const $tweetText = $(this).serialize();
     const tweet = $('#tweet-text').val();
     const tweetCount = tweet.length;
 
@@ -79,13 +79,22 @@ $(document).ready(function() {
       return errorMessage('<i class="fas fa-exclamation-triangle"></i>  Text is missing!  <i class="fas fa-exclamation-triangle"></i>');
     } else if (tweetCount > 140) {    //Check if tweet exceeds 140 characters
       return errorMessage('<i class="fas fa-exclamation-triangle"></i>  Please respect our limit of 140 characters!  <i class="fas fa-exclamation-triangle"></i>');
-    } else  {
+    } 
+    
+      // ajax post request to add the new tweets
       $.ajax({
         method: 'POST',
         url: '/tweets',
         data: $("#tweetform").serialize()
-      }).then(loadTweets());
-    }
+      })
+      // then clear the text box
+      .then(function() {
+        $('#tweet-text').val('');     //to put the curser back to begining
+        $('.counter').text('140');   // reset the character counter
+        $('#tweets-container').empty();
+        loadTweets();
+      });
+    
   
     // $.post('/tweets', $tweetText)   //send form data to server
     //   .then(() => {
