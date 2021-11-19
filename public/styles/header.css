@@ -20,6 +20,7 @@ header.top {
     width: 30%; 
     margin-top: 2em;
     margin-left: 5em;
+    border-radius: 15%;
   }
 
 }
